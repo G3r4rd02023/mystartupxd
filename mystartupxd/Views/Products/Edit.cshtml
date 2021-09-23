@@ -1,12 +1,12 @@
 ﻿
-
-@model mystartupxd.Models.CategoryViewModel
+@model mystartupxd.Models.ProductViewModel
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h4><strong> Editar Categoría</strong></h4>
+
+<h4><strong>Editar Producto</strong></h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,7 +14,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
 
-            <partial name="_Category" />
+            <partial name="_Product" />
 
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">
@@ -24,7 +24,12 @@
             </div>
         </form>
     </div>
+    <div class="col-md-4">
+        <img src="@Model.FirstImage" style="width:200px;height:200px;max-width: 100%; height: auto;" />
+    </div>
 </div>
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
