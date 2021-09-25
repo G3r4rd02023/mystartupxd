@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace mystartupxd.Data.Entities
@@ -16,6 +17,7 @@ namespace mystartupxd.Data.Entities
         [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         public string Name { get; set; }
 
+        [JsonIgnore]
         [NotMapped]
         public int IdCountry { get; set; }
 
