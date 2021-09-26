@@ -8,12 +8,7 @@ namespace mystartupxd.Helpers
 {
     public interface ICombosHelper
     {
-        IEnumerable<SelectListItem> GetComboCategories();
-
-        IEnumerable<SelectListItem> GetComboCountries();
-
-        IEnumerable<SelectListItem> GetComboCities(int countryId);
-
+        IEnumerable<SelectListItem> GetComboCategories();        
         IEnumerable<SelectListItem> GetComboProducts();
     }
 }

@@ -37,52 +37,7 @@ namespace mystartupxd.Helpers
             return list;
         }
 
-        public IEnumerable<SelectListItem> GetComboCountries()
-        {
-            List<SelectListItem> list = _context.Countries.Select(t => new SelectListItem
-            {
-                Text = t.Name,
-                Value = $"{t.Id}"
-            })
-                .OrderBy(t => t.Text)
-                .ToList();
-
-            list.Insert(0, new SelectListItem
-            {
-                Text = "[Select a country...]",
-                Value = "0"
-            });
-
-            return list;
-        }
-
-        public IEnumerable<SelectListItem> GetComboCities(int countryId)
-        {
-            List<SelectListItem> list = new List<SelectListItem>();
-            Country country = _context.Countries
-                .Include(d => d.Cities)
-                .FirstOrDefault(d => d.Id == countryId);
-            if (country != null)
-            {
-                list = country.Cities.Select(t => new SelectListItem
-                {
-                    Text = t.Name,
-                    Value = $"{t.Id}"
-                })
-                    .OrderBy(t => t.Text)
-                    .ToList();
-            }
-
-            list.Insert(0, new SelectListItem
-            {
-                Text = "[Selecione una Ciudad...]",
-                Value = "0"
-            });
-
-            return list;
-        }
-
-     
+             
 
         public IEnumerable<SelectListItem> GetComboProducts()
         {

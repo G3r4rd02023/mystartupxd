@@ -64,8 +64,7 @@ namespace mystartupxd.Helpers
 
         public async Task<User> GetUserAsync(string email)
         {
-            return await _context.Users
-                .Include(u => u.City)
+            return await _context.Users                
                 .FirstOrDefaultAsync(u => u.Email == email);
         }
 
@@ -89,8 +88,7 @@ namespace mystartupxd.Helpers
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 ImageUrl = path,
-                PhoneNumber = model.PhoneNumber,
-                City = await _context.Cities.FindAsync(model.CityId),
+                PhoneNumber = model.PhoneNumber,               
                 UserName = model.Username,
                 UserType = userType
             };
@@ -118,8 +116,7 @@ namespace mystartupxd.Helpers
 
         public async Task<User> GetUserAsync(Guid userId)
         {
-            return await _context.Users
-                .Include(u => u.City)
+            return await _context.Users               
                 .FirstOrDefaultAsync(u => u.Id == userId.ToString());
         }
 

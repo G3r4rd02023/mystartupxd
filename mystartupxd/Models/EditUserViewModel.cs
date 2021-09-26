@@ -49,19 +49,6 @@ namespace mystartupxd.Models
         [Display(Name = "Foto")]
         public IFormFile ImageFile { get; set; }
 
-        [Required]
-        [Display(Name = "Country")]
-        [Range(1, int.MaxValue, ErrorMessage = "Seleccione un país.")]
-        public int CountryId { get; set; }
-
-        public IEnumerable<SelectListItem> Countries { get; set; }
-
-
-        [Required]
-        [Display(Name = "City")]
-        [Range(1, int.MaxValue, ErrorMessage = "Seleccione una ciudad.")]
-        public int CityId { get; set; }
-
-        public IEnumerable<SelectListItem> Cities { get; set; }
+        
     }
 }

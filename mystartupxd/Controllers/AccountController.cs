@@ -77,8 +77,7 @@ namespace mystartupxd.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Users
-                .Include(u => u.City)
+            return View(await _context.Users                
                 .ToListAsync());
         }
 
@@ -87,8 +86,7 @@ namespace mystartupxd.Controllers
         {
             AddUserViewModel model = new AddUserViewModel
             {
-                Countries = _combosHelper.GetComboCountries(),
-                Cities = _combosHelper.GetComboCities(0),
+                
             };
 
             return View(model);
@@ -110,9 +108,7 @@ namespace mystartupxd.Controllers
                 User user = await _userHelper.AddUserAsync(model, path, UserType.User);
                 if (user == null)
                 {
-                    ModelState.AddModelError(string.Empty, "Este correo ya esta siendo usado.");
-                    model.Countries = _combosHelper.GetComboCountries();                   
-                    model.Cities = _combosHelper.GetComboCities(model.CountryId);
+                    ModelState.AddModelError(string.Empty, "Este correo ya esta siendo usado.");                  
                     return View(model);
                 }
 
@@ -135,23 +131,11 @@ namespace mystartupxd.Controllers
                 ModelState.AddModelError(string.Empty, response.Message);
             }
 
-            model.Countries = _combosHelper.GetComboCountries();          
-            model.Cities = _combosHelper.GetComboCities(model.CountryId);
+           
             return View(model);
         }
 
-        public JsonResult GetCities(int countryId)
-        {
-            Country country = _context.Countries
-                .Include(c => c.Cities)
-                .FirstOrDefault(c => c.Id == countryId);
-            if (country == null)
-            {
-                return null;
-            }
-
-            return Json(country.Cities.OrderBy(d => d.Name));
-        }
+        
 
         public async Task<IActionResult> ChangeUser()
         {
@@ -162,11 +146,7 @@ namespace mystartupxd.Controllers
             }
 
 
-            Country country = await _context.Countries.FirstOrDefaultAsync(c => c.Cities.FirstOrDefault(ci => ci.Id == user.City.Id) != null);
-            if (country == null)
-            {
-                country = await _context.Countries.FirstOrDefaultAsync();
-            }
+           
 
             EditUserViewModel model = new EditUserViewModel
             {
@@ -174,11 +154,7 @@ namespace mystartupxd.Controllers
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 PhoneNumber = user.PhoneNumber,
-                ImageUrl = user.ImageUrl,
-                Cities = _combosHelper.GetComboCities(country.Id),
-                CityId = user.City.Id,
-                Countries = _combosHelper.GetComboCountries(),
-                CountryId = country.Id,
+                ImageUrl = user.ImageUrl,              
                 Id = user.Id,
                 Document = user.Document
             };
@@ -206,16 +182,14 @@ namespace mystartupxd.Controllers
                 user.LastName = model.LastName;
                 user.Address = model.Address;
                 user.PhoneNumber = model.PhoneNumber;
-                user.ImageUrl = path;
-                user.City = await _context.Cities.FindAsync(model.CityId);
+                user.ImageUrl = path;                
                 user.Document = model.Document;
 
                 await _userHelper.UpdateUserAsync(user);
                 return RedirectToAction("Index", "Home");
             }
 
-            model.Cities = _combosHelper.GetComboCities(model.CountryId);
-            model.Countries = _combosHelper.GetComboCountries();
+           
             return View(model);
         }
 
@@ -338,8 +312,7 @@ namespace mystartupxd.Controllers
         {
             AddUserViewModel model = new AddUserViewModel
             {
-                Countries = _combosHelper.GetComboCountries(),               
-                Cities = _combosHelper.GetComboCities(0),
+               
             };
 
             return View(model);
@@ -361,9 +334,7 @@ namespace mystartupxd.Controllers
                 User user = await _userHelper.AddUserAsync(model, path, UserType.Admin);
                 if (user == null)
                 {
-                    ModelState.AddModelError(string.Empty, "Este correo ya esta siendo utilizado por un usuario.");
-                    model.Countries = _combosHelper.GetComboCountries();                   
-                    model.Cities = _combosHelper.GetComboCities(model.CountryId);
+                    ModelState.AddModelError(string.Empty, "Este correo ya esta siendo utilizado por un usuario.");                   
                     return View(model);
                 }
 
@@ -385,9 +356,7 @@ namespace mystartupxd.Controllers
 
                 ModelState.AddModelError(string.Empty, response.Message);
             }
-
-            model.Countries = _combosHelper.GetComboCountries();            
-            model.Cities = _combosHelper.GetComboCities(model.CountryId);
+           
             return View(model);
         }
 

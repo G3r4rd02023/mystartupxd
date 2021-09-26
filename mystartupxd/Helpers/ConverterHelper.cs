@@ -39,26 +39,7 @@ namespace mystartupxd.Helpers
             };
         }
 
-        public Country ToCountry(CountryViewModel model, bool isNew, string path)
-        {
-            return new Country
-            {
-                Id = isNew ? 0 : model.Id,
-                ImageUrl = path,
-                Name = model.Name
-            };
-        }
-
-
-        public CountryViewModel ToCountryViewModel(Country country)
-        {
-            return new CountryViewModel
-            {
-                Id = country.Id,
-                ImageUrl = country.ImageUrl,
-                Name = country.Name
-            };
-        }
+        
 
         public async Task<Product> ToProductAsync(ProductViewModel model, bool isNew, string path)
         {

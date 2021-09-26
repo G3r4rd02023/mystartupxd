@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace mystartupxd.Controllers
 {
-	[Authorize]
+	
 	public class OrdersController : Controller
 	{
 		private readonly IOrderRepository orderRepository;
@@ -159,8 +159,7 @@ namespace mystartupxd.Controllers
 			}
 
 			Order order = await _context.Orders
-				.Include(o => o.User)
-				.ThenInclude(u => u.City)
+				.Include(o => o.User)				
 				.Include(o => o.Items)
 				.ThenInclude(od => od.Product)
 				.ThenInclude(od => od.Category)

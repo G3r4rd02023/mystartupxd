@@ -43,7 +43,7 @@ namespace mystartupxd.Data.Entities
         [Display(Name = "Rol")]
         public UserType UserType { get; set; }
 
-        public City City { get; set; }
+       
 
         [Display(Name = "Usuario")]
         public string FullName => $"{FirstName} {LastName}";

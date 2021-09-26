@@ -10,7 +10,7 @@
 
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -35,7 +35,10 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Register" class="btn btn-primary" />
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i>
+                </button>
+                <a asp-action="Index" class="btn btn-success"><i class=" fas fa-undo-alt"></i></a>
             </div>
         </form>
     </div>
@@ -47,34 +50,6 @@
     </p>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#CountryId").change(function () {
-                $("#CityId").empty();
-                $("#CityId").append('<option value="0">[Select a city...]</option>');
-                $.ajax({
-                    type: 'POST',
-                    url: '@Url.Action("GetCities")',
-                    dataType: 'json',
-                    data: { countryId: $("#CountryId").val() },
-                    success: function (subcategories) {
-                        $.each(subcategories, function (i, city) {
-                            debugger;
-                            $("#CityId").append('<option value="'
-                                + city.id + '">'
-                                + city.name + '</option>');
-                        });
-                    },
-                    error: function (ex) {
-                        alert('Failed to retrieve cities.' + ex);
-                    }
-                });
-                return false;
-            })
-        });
-    </script>
-}
+
 
 

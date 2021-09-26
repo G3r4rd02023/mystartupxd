@@ -20,11 +20,9 @@ namespace mystartupxd.Data
 
         public async Task SeedAsync()
         {
-            await _context.Database.EnsureCreatedAsync();
-            await CheckCountriesAsync();
+            await _context.Database.EnsureCreatedAsync();          
             await CheckRolesAsync();
-            await CheckUserAsync("0801-1987-13256", "Gerardo", "Lanza", "glanza007@gmail.com", "3307 7964", "Tegucigalpa MDC 6208", UserType.Admin);
-
+            await CheckUserAsync("0801-1987-13256", "Gerardo", "Lanza", "glanza007@gmail.com", "3307 7964", "Tegucigalpa MDC 6208", UserType.Admin);           
         }
 
         private async Task<User> CheckUserAsync(
@@ -47,8 +45,7 @@ namespace mystartupxd.Data
                     UserName = email,
                     PhoneNumber = phone,
                     Address = address,
-                    Document = document,
-                    City = _context.Cities.FirstOrDefault(),
+                    Document = document,                  
                     UserType = userType
                 };
 
@@ -69,45 +66,7 @@ namespace mystartupxd.Data
             await _userHelper.CheckRoleAsync(UserType.User.ToString());
         }
 
-        private async Task CheckCountriesAsync()
-        {
-            if (!_context.Countries.Any())
-            {
-                _context.Countries.Add(new Country
-                {
-                    Name = "Honduras",
-                    Cities = new List<City>
-                        {
-                            new City { Name = "Tegucigalpa" },
-                            new City { Name = "San Pedro Sula" },
-                            new City { Name = "La Ceiba" }
-                        }
-                });
-                _context.Countries.Add(new Country
-                {
-                    Name = "USA",
-                    Cities = new List<City>
-                        {
-                            new City { Name = "New York" },
-                            new City { Name = "Los Angeles" },
-                            new City { Name = "Chicago" }
-                        }
-
-                });
-                _context.Countries.Add(new Country
-                {
-                    Name = "España",
-                    Cities = new List<City>
-                        {
-                            new City { Name = "Madrid" },
-                            new City { Name = "Barcelona" },
-                            new City { Name = "Sevilla" }
-                        }
-
-                });
-                await _context.SaveChangesAsync();
-            }
-        }
+       
 
     }
 }
