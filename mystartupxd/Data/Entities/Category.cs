@@ -22,8 +22,8 @@ namespace mystartupxd.Data.Entities
         [Display(Name = "Foto")]
         public string ImageFullPath => string.IsNullOrEmpty(ImageUrl)
             ? $"https://localhost:44341/images/noimage.png"
-            : $"https://localhost:44341{ImageUrl[1..]}";
-        //: $"https://workshopvehicles.azurewebsites.net{ImageUrl.Substring(1)}";
+            //: $"https://localhost:44341{ImageUrl[1..]}";
+            : $"https://mystartup.azurewebsites.net{ImageUrl.Substring(1)}";
 
         public ICollection<Product> Products { get; set; }
     }
